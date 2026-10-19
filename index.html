@@ -18,25 +18,33 @@
   <meta property="og:image" content="https://amitgit24.github.io/assets/amit-jain.jpg">
   <meta property="og:type" content="website">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <title>Amit Jain | Robot Learning & Physical AI</title>
 
   <style>
     :root {
-      --bg: #f7f8fa;
+      --bg: #fffaf3;
       --surface: #ffffff;
-      --surface-soft: #f1f4f8;
+      --surface-soft: #fff1e4;
 
-      --text: #16181d;
-      --muted: #626a76;
-      --border: #e3e7ed;
+      --text: #2b2420;
+      --muted: #6f625a;
+      --border: #f0e2d3;
 
-      --accent: #1f4f82;
-      --accent-dark: #14395f;
-      --accent-soft: #eaf2fb;
+      --accent: #d9643a;
+      --accent-dark: #a8461f;
+      --accent-soft: #fdeadf;
+
+      --teal: #2a9d8f;
+      --teal-soft: #dff3ef;
+      --sun: #f4a261;
 
       --max-width: 1080px;
       --radius: 16px;
-      --shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+      --shadow: 0 10px 30px rgba(168, 70, 31, 0.10);
     }
 
     * {
@@ -47,6 +55,7 @@
     body {
       margin: 0;
       font-family:
+        "Plus Jakarta Sans",
         Inter,
         ui-sans-serif,
         system-ui,
@@ -84,7 +93,7 @@
       top: 0;
       z-index: 100;
 
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 250, 243, 0.9);
       backdrop-filter: blur(12px);
 
       border-bottom: 1px solid var(--border);
@@ -121,17 +130,16 @@
     --------------------------------- */
 
     header {
-      color: white;
+      position: relative;
+      overflow: hidden;
+
+      color: var(--text);
 
       background:
-        linear-gradient(
-          100deg,
-          rgba(10, 26, 46, 0.92) 0%,
-          rgba(14, 40, 70, 0.78) 45%,
-          rgba(14, 40, 70, 0.35) 100%
-        ),
-        url("assets/hero-bg.jpg") center / cover no-repeat;
-      background-color: #0f2a48;
+        radial-gradient(circle at 12% 20%, rgba(244, 162, 97, 0.35), transparent 40%),
+        radial-gradient(circle at 88% 30%, rgba(42, 157, 143, 0.22), transparent 42%),
+        radial-gradient(circle at 60% 95%, rgba(217, 100, 58, 0.18), transparent 45%),
+        linear-gradient(160deg, #fff4e8 0%, #fffaf3 60%, #fdf0e6 100%);
     }
 
     .hero {
@@ -153,7 +161,11 @@
       font-size: 0.85rem;
       font-weight: 700;
 
-      color: #9cc7f2;
+      padding: 6px 12px;
+
+      border-radius: 999px;
+      background: var(--teal-soft);
+      color: #1d7368;
 
       text-transform: uppercase;
       letter-spacing: 0.12em;
@@ -162,7 +174,9 @@
     h1 {
       margin: 0;
 
-      font-size: clamp(3rem, 7vw, 5.5rem);
+      color: var(--text);
+      font-size: clamp(2.6rem, 6vw, 4.6rem);
+      white-space: nowrap;
       line-height: 0.98;
       letter-spacing: -0.055em;
     }
@@ -174,9 +188,25 @@
       font-weight: 500;
     }
 
+    h1 .wave {
+      display: inline-block;
+      transform-origin: 70% 70%;
+      animation: wave 2.4s ease-in-out 0.6s 2;
+    }
+
+    @keyframes wave {
+      0%, 60%, 100% { transform: rotate(0deg); }
+      10%, 30% { transform: rotate(14deg); }
+      20%, 40% { transform: rotate(-8deg); }
+    }
+
+    .hero-role {
+      color: var(--accent-dark);
+    }
+
     .hero-institution {
       margin: 0;
-      color: rgba(255, 255, 255, 0.75);
+      color: var(--muted);
       font-size: 1.08rem;
     }
 
@@ -185,7 +215,7 @@
       margin-top: 26px;
 
       font-size: 1.08rem;
-      color: rgba(255, 255, 255, 0.86);
+      color: #4a3f38;
     }
 
     .hero-actions {
@@ -213,30 +243,33 @@
     }
 
     .button.primary {
-      background: white;
-      border-color: white;
-      color: var(--accent-dark);
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+      box-shadow: 0 6px 18px rgba(217, 100, 58, 0.3);
     }
 
     .button.primary:hover {
-      background: var(--accent-soft);
+      background: var(--accent-dark);
       transform: translateY(-1px);
     }
 
     .button.secondary {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.45);
-      color: white;
+      background: white;
+      border-color: var(--border);
+      color: var(--text);
     }
 
     .button.secondary:hover {
-      background: rgba(255, 255, 255, 0.18);
+      border-color: var(--accent);
+      color: var(--accent-dark);
       transform: translateY(-1px);
     }
 
     /* Hero portrait */
 
     .portrait {
+      position: relative;
       justify-self: center;
 
       width: 100%;
@@ -245,12 +278,20 @@
 
       padding: 10px;
 
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: white;
+      border: 1px solid var(--border);
       border-radius: 24px;
 
-      backdrop-filter: blur(6px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      /* Warm offset block behind the card */
+      box-shadow:
+        18px 18px 0 -2px var(--sun),
+        0 24px 50px rgba(168, 70, 31, 0.18);
+      transform: rotate(2deg);
+      transition: transform 0.3s ease;
+    }
+
+    .portrait:hover {
+      transform: rotate(0deg) translateY(-4px);
     }
 
     .portrait img {
@@ -268,7 +309,7 @@
 
       font-size: 0.86rem;
       text-align: center;
-      color: rgba(255, 255, 255, 0.8);
+      color: var(--muted);
     }
 
     /* Highlight numbers */
@@ -276,20 +317,30 @@
     .stats {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
 
-      border-top: 1px solid rgba(255, 255, 255, 0.18);
+      padding-bottom: 50px;
     }
 
     .stat {
-      padding: 26px 20px 30px 0;
+      padding: 20px 20px 22px;
+
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid var(--border);
+      border-radius: 14px;
     }
 
     .stat strong {
       display: block;
 
+      color: var(--accent);
       font-size: clamp(1.6rem, 3vw, 2.1rem);
       line-height: 1.1;
       letter-spacing: -0.03em;
+    }
+
+    .stat:nth-child(even) strong {
+      color: var(--teal);
     }
 
     .stat span {
@@ -297,7 +348,96 @@
       margin-top: 6px;
 
       font-size: 0.86rem;
-      color: rgba(255, 255, 255, 0.72);
+      color: var(--muted);
+    }
+
+    /* ---------------------------------
+       Robot animations in the side gutters
+    --------------------------------- */
+
+    section {
+      position: relative;
+    }
+
+    .side-robot {
+      display: none;
+    }
+
+    @media (min-width: 1400px) {
+      .side-robot {
+        display: block;
+
+        position: absolute;
+        top: 85px;
+        bottom: 85px;
+
+        width: clamp(170px, calc((100vw - var(--max-width)) / 2 - 70px), 290px);
+      }
+
+      .side-robot.left {
+        left: calc((100vw - var(--max-width)) / 4);
+        transform: translateX(-50%);
+      }
+
+      .side-robot.right {
+        right: calc((100vw - var(--max-width)) / 4);
+        transform: translateX(50%);
+      }
+
+      .side-robot.lower {
+        top: 50%;
+      }
+    }
+
+    .side-robot figure {
+      position: sticky;
+      top: 100px;
+
+      margin: 0;
+      padding: 8px;
+
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .side-robot.right figure {
+      animation-delay: -3s;
+    }
+
+    .side-robot img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+    }
+
+    .side-robot figcaption {
+      padding: 8px 4px 2px;
+
+      color: var(--muted);
+      font-size: 0.76rem;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    .side-robot figcaption a {
+      color: var(--accent-dark);
+      font-weight: 600;
+    }
+
+    @keyframes float {
+      0%, 100% { translate: 0 0; }
+      50% { translate: 0 -8px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .side-robot figure,
+      h1 .wave {
+        animation: none;
+      }
     }
 
     /* ---------------------------------
@@ -339,7 +479,7 @@
     .lead {
       max-width: 770px;
 
-      color: #454c56;
+      color: #4a3f38;
       font-size: 1.07rem;
     }
 
@@ -381,9 +521,16 @@
     }
 
     .research-number {
-      margin-bottom: 25px;
+      display: inline-grid;
+      place-items: center;
 
-      color: var(--accent);
+      width: 34px;
+      height: 34px;
+      margin-bottom: 18px;
+
+      border-radius: 50%;
+      background: var(--teal-soft);
+      color: #1d7368;
       font-size: 0.8rem;
       font-weight: 700;
     }
@@ -457,7 +604,7 @@
       margin: 14px 0 0;
       padding-left: 20px;
 
-      color: #515965;
+      color: #5a4d45;
     }
 
     .points li + li {
@@ -704,13 +851,9 @@
       border-radius: 20px;
 
       background:
-        linear-gradient(
-          100deg,
-          rgba(20, 57, 95, 0.96),
-          rgba(20, 57, 95, 0.82)
-        ),
-        url("assets/hero-bg.jpg") center / cover no-repeat;
-      background-color: var(--accent-dark);
+        radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.18), transparent 40%),
+        linear-gradient(120deg, var(--accent-dark) 0%, var(--accent) 55%, var(--sun) 100%);
+      background-color: var(--accent);
       color: white;
     }
 
@@ -723,7 +866,7 @@
 
     .contact-box p {
       max-width: 650px;
-      color: rgba(255, 255, 255, 0.78);
+      color: rgba(255, 255, 255, 0.9);
     }
 
     .contact-links {
@@ -811,7 +954,7 @@
 
     @media (max-width: 560px) {
       h1 {
-        font-size: 3rem;
+        font-size: 2.4rem;
       }
 
       section {
@@ -876,7 +1019,7 @@
           </span>
 
           <h1>
-            Amit Jain
+            Hi, I'm Amit <span class="wave" aria-hidden="true">👋</span>
           </h1>
 
           <p class="hero-role">
@@ -971,6 +1114,13 @@
     =================================== -->
 
     <section id="about">
+
+      <aside class="side-robot right" aria-hidden="true">
+        <figure>
+          <img src="assets/robot-aloha.webp" alt="Simulated ALOHA bimanual robot transferring a cube" loading="lazy">
+          <figcaption>ALOHA bimanual · ACT policy · <a href="https://github.com/huggingface/gym-aloha" target="_blank" rel="noopener">source</a></figcaption>
+        </figure>
+      </aside>
 
       <div class="container section-heading">
 
@@ -1081,6 +1231,13 @@
 
     <section id="publications">
 
+      <aside class="side-robot left" aria-hidden="true">
+        <figure>
+          <img src="assets/robot-pusht.webp" alt="Diffusion Policy solving the PushT task" loading="lazy">
+          <figcaption>PushT · Diffusion Policy · <a href="https://github.com/huggingface/gym-pusht" target="_blank" rel="noopener">source</a></figcaption>
+        </figure>
+      </aside>
+
       <div class="container section-heading">
 
         <h2 class="section-title">
@@ -1169,6 +1326,20 @@
     =================================== -->
 
     <section id="experience">
+
+      <aside class="side-robot right" aria-hidden="true">
+        <figure>
+          <img src="assets/robot-so100.webp" alt="Real SO-100 robot arms" loading="lazy">
+          <figcaption>SO-100 arms · LeRobot · <a href="https://github.com/huggingface/lerobot" target="_blank" rel="noopener">source</a></figcaption>
+        </figure>
+      </aside>
+
+      <aside class="side-robot left lower" aria-hidden="true">
+        <figure>
+          <img src="assets/robot-hand.webp" alt="Simulated dexterous Shadow Hand" loading="lazy">
+          <figcaption>Shadow Hand · Genesis · <a href="https://github.com/Genesis-Embodied-AI/Genesis" target="_blank" rel="noopener">source</a></figcaption>
+        </figure>
+      </aside>
 
       <div class="container section-heading">
 
@@ -1316,6 +1487,13 @@
 
     <section id="isaac-sim">
 
+      <aside class="side-robot left" aria-hidden="true">
+        <figure>
+          <img src="assets/robot-franka.webp" alt="Franka arm grasping a bottle in simulation" loading="lazy">
+          <figcaption>Franka grasp · Genesis · <a href="https://github.com/Genesis-Embodied-AI/Genesis" target="_blank" rel="noopener">source</a></figcaption>
+        </figure>
+      </aside>
+
       <div class="container section-heading">
 
         <h2 class="section-title">
@@ -1425,6 +1603,13 @@
     =================================== -->
 
     <section id="projects">
+
+      <aside class="side-robot right" aria-hidden="true">
+        <figure>
+          <img src="assets/robot-xarm.webp" alt="Simulated xArm lifting a cube" loading="lazy">
+          <figcaption>xArm lift · TD-MPC · <a href="https://github.com/huggingface/gym-xarm" target="_blank" rel="noopener">source</a></figcaption>
+        </figure>
+      </aside>
 
       <div class="container section-heading">
 
@@ -1829,7 +2014,7 @@
       </span>
 
       <span>
-        IIT Madras · Robot Learning & Physical AI
+        Robot animations: LeRobot gym-aloha / gym-pusht / gym-xarm and Genesis (Apache-2.0)
       </span>
 
     </div>
