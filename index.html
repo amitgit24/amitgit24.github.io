@@ -351,94 +351,6 @@
       color: var(--muted);
     }
 
-    /* ---------------------------------
-       Robot animations in the side gutters
-    --------------------------------- */
-
-    section {
-      position: relative;
-    }
-
-    .side-robot {
-      display: none;
-    }
-
-    @media (min-width: 1400px) {
-      .side-robot {
-        display: block;
-
-        position: absolute;
-        top: 85px;
-        bottom: 85px;
-
-        width: clamp(170px, calc((100vw - var(--max-width)) / 2 - 70px), 290px);
-      }
-
-      .side-robot.left {
-        left: calc((100vw - var(--max-width)) / 4);
-        transform: translateX(-50%);
-      }
-
-      .side-robot.right {
-        right: calc((100vw - var(--max-width)) / 4);
-        transform: translateX(50%);
-      }
-
-      .side-robot.lower {
-        top: 50%;
-      }
-    }
-
-    .side-robot figure {
-      position: sticky;
-      top: 100px;
-
-      margin: 0;
-      padding: 8px;
-
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-
-      animation: float 6s ease-in-out infinite;
-    }
-
-    .side-robot.right figure {
-      animation-delay: -3s;
-    }
-
-    .side-robot img {
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
-    }
-
-    .side-robot figcaption {
-      padding: 8px 4px 2px;
-
-      color: var(--muted);
-      font-size: 0.76rem;
-      line-height: 1.4;
-      text-align: center;
-    }
-
-    .side-robot figcaption a {
-      color: var(--accent-dark);
-      font-weight: 600;
-    }
-
-    @keyframes float {
-      0%, 100% { translate: 0 0; }
-      50% { translate: 0 -8px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .side-robot figure,
-      h1 .wave {
-        animation: none;
-      }
-    }
 
     /* ---------------------------------
        Sections
@@ -886,6 +798,117 @@
     }
 
     /* ---------------------------------
+       Waving robot (fixed in the left gutter)
+    --------------------------------- */
+
+    .robot-buddy {
+      display: none;
+    }
+
+    @media (min-width: 1320px) {
+      .robot-buddy {
+        display: block;
+
+        position: fixed;
+        z-index: 50;
+        top: 50%;
+        left: calc((100vw - var(--max-width)) / 4);
+
+        width: clamp(150px, calc((100vw - var(--max-width)) / 2 - 40px), 260px);
+        aspect-ratio: 3 / 4;
+
+        transform: translate(-50%, -45%);
+        cursor: pointer;
+      }
+    }
+
+    .robot-buddy canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .robot-bubble {
+      position: absolute;
+      top: 2%;
+      left: 58%;
+
+      padding: 6px 12px;
+
+      border-radius: 14px 14px 14px 4px;
+      background: white;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+
+      color: var(--accent-dark);
+      font-size: 0.9rem;
+      font-weight: 700;
+      white-space: nowrap;
+
+      opacity: 0;
+      transform: translateY(6px) scale(0.9);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .robot-buddy.waving .robot-bubble {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ---------------------------------
+       Robot and human hands reaching (end of page)
+    --------------------------------- */
+
+    .reach {
+      position: relative;
+
+      width: 100%;
+      max-width: 1240px;
+      margin: 0 auto 10px;
+
+      aspect-ratio: 1400 / 349;
+      overflow: hidden;
+    }
+
+    .reach img {
+      position: absolute;
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+
+      transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reach .robot-half {
+      clip-path: inset(0 50% 0 0);
+      transform: translateX(-12%);
+    }
+
+    .reach .human-half {
+      clip-path: inset(0 0 0 50%);
+      transform: translateX(12%);
+    }
+
+    .reach.met img {
+      transform: none;
+    }
+
+    .reach-caption {
+      margin: 0 0 40px;
+
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reach img {
+        transition: none;
+      }
+    }
+
+    /* ---------------------------------
        Footer
     --------------------------------- */
 
@@ -1115,13 +1138,6 @@
 
     <section id="about">
 
-      <aside class="side-robot right" aria-hidden="true">
-        <figure>
-          <img src="assets/robot-aloha.webp" alt="Simulated ALOHA bimanual robot transferring a cube" loading="lazy">
-          <figcaption>ALOHA bimanual · ACT policy · <a href="https://github.com/huggingface/gym-aloha" target="_blank" rel="noopener">source</a></figcaption>
-        </figure>
-      </aside>
-
       <div class="container section-heading">
 
         <h2 class="section-title">
@@ -1231,13 +1247,6 @@
 
     <section id="publications">
 
-      <aside class="side-robot left" aria-hidden="true">
-        <figure>
-          <img src="assets/robot-pusht.webp" alt="Diffusion Policy solving the PushT task" loading="lazy">
-          <figcaption>PushT · Diffusion Policy · <a href="https://github.com/huggingface/gym-pusht" target="_blank" rel="noopener">source</a></figcaption>
-        </figure>
-      </aside>
-
       <div class="container section-heading">
 
         <h2 class="section-title">
@@ -1326,20 +1335,6 @@
     =================================== -->
 
     <section id="experience">
-
-      <aside class="side-robot right" aria-hidden="true">
-        <figure>
-          <img src="assets/robot-so100.webp" alt="Real SO-100 robot arms" loading="lazy">
-          <figcaption>SO-100 arms · LeRobot · <a href="https://github.com/huggingface/lerobot" target="_blank" rel="noopener">source</a></figcaption>
-        </figure>
-      </aside>
-
-      <aside class="side-robot left lower" aria-hidden="true">
-        <figure>
-          <img src="assets/robot-hand.webp" alt="Simulated dexterous Shadow Hand" loading="lazy">
-          <figcaption>Shadow Hand · Genesis · <a href="https://github.com/Genesis-Embodied-AI/Genesis" target="_blank" rel="noopener">source</a></figcaption>
-        </figure>
-      </aside>
 
       <div class="container section-heading">
 
@@ -1487,13 +1482,6 @@
 
     <section id="isaac-sim">
 
-      <aside class="side-robot left" aria-hidden="true">
-        <figure>
-          <img src="assets/robot-franka.webp" alt="Franka arm grasping a bottle in simulation" loading="lazy">
-          <figcaption>Franka grasp · Genesis · <a href="https://github.com/Genesis-Embodied-AI/Genesis" target="_blank" rel="noopener">source</a></figcaption>
-        </figure>
-      </aside>
-
       <div class="container section-heading">
 
         <h2 class="section-title">
@@ -1603,13 +1591,6 @@
     =================================== -->
 
     <section id="projects">
-
-      <aside class="side-robot right" aria-hidden="true">
-        <figure>
-          <img src="assets/robot-xarm.webp" alt="Simulated xArm lifting a cube" loading="lazy">
-          <figcaption>xArm lift · TD-MPC · <a href="https://github.com/huggingface/gym-xarm" target="_blank" rel="noopener">source</a></figcaption>
-        </figure>
-      </aside>
 
       <div class="container section-heading">
 
@@ -1953,19 +1934,28 @@
 
     <section id="contact">
 
+      <div class="reach" id="reach" role="img" aria-label="A robot hand and a human hand reaching toward each other">
+        <img class="robot-half" src="assets/hands-reaching.webp" alt="" loading="lazy" width="1400" height="349">
+        <img class="human-half" src="assets/hands-reaching.webp" alt="" loading="lazy" width="1400" height="349">
+      </div>
+
       <div class="container">
+
+        <p class="reach-caption">
+          Teaching robots by learning from people.
+        </p>
 
         <div class="contact-box">
 
           <h2>
-            Interested in robot learning,
-            Physical AI or multimodal robotics?
+            Let's build robots that learn,
+            in simulation and in the real world.
           </h2>
 
           <p>
             I am open to research and engineering roles in robot
-            learning, Vision-Language-Action models and embodied AI.
-            I'd be glad to talk.
+            learning, Vision-Language-Action models, robot simulation
+            and embodied AI. I'd be glad to talk.
           </p>
 
           <div class="contact-links">
@@ -2014,12 +2004,120 @@
       </span>
 
       <span>
-        Robot animations: LeRobot gym-aloha / gym-pusht / gym-xarm and Genesis (Apache-2.0)
+        IIT Madras · Robot Learning & Physical AI
       </span>
 
     </div>
 
   </footer>
+
+  <!-- ==================================
+       Waving robot
+       Model: "RobotExpressive" by Tomás Laulhé (Quaternius), CC0 1.0,
+       via the three.js examples.
+  =================================== -->
+
+  <div class="robot-buddy" id="robot-buddy" title="Click me!" aria-hidden="true">
+    <span class="robot-bubble">Hi there!</span>
+  </div>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+
+  <script type="module">
+    // Hands slide together when the end of the page comes into view
+    const reach = document.getElementById('reach');
+    new IntersectionObserver((entries, obs) => {
+      if (entries[0].isIntersecting) {
+        reach.classList.add('met');
+        obs.disconnect();
+      }
+    }, { threshold: 0.4 }).observe(reach);
+
+    // Waving robot, only rendered where the left gutter is wide enough
+    const buddy = document.getElementById('robot-buddy');
+
+    if (getComputedStyle(buddy).display !== 'none') {
+      const THREE = await import('three');
+      const { GLTFLoader } = await import('three/addons/loaders/GLTFLoader.js');
+
+      const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      buddy.prepend(renderer.domElement);
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(30, 3 / 4, 0.1, 100);
+      camera.position.set(0, 2.6, 13);
+      camera.lookAt(0, 2.3, 0);
+
+      scene.add(new THREE.HemisphereLight(0xfff4e8, 0xd9a07a, 2.2));
+      const sun = new THREE.DirectionalLight(0xffffff, 2.2);
+      sun.position.set(3, 8, 6);
+      scene.add(sun);
+
+      const resize = () => {
+        const { width, height } = buddy.getBoundingClientRect();
+        renderer.setSize(width, height, false);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+      };
+      resize();
+      addEventListener('resize', resize);
+
+      const gltf = await new GLTFLoader().loadAsync('assets/robot-expressive.glb');
+      const robot = gltf.scene;
+      robot.rotation.y = 0.45; // turn slightly toward the page content
+      scene.add(robot);
+
+      const mixer = new THREE.AnimationMixer(robot);
+      const clip = (name) => mixer.clipAction(THREE.AnimationClip.findByName(gltf.animations, name));
+
+      const idle = clip('Idle');
+      const wave = clip('Wave');
+      const thumbs = clip('ThumbsUp');
+      for (const a of [wave, thumbs]) {
+        a.setLoop(THREE.LoopOnce);
+        a.clampWhenFinished = true;
+      }
+      idle.play();
+
+      let busy = false;
+      const gesture = (action) => {
+        if (busy || reduceMotion) return;
+        busy = true;
+        buddy.classList.toggle('waving', action === wave);
+        action.reset().fadeIn(0.3).play();
+        idle.fadeOut(0.3);
+      };
+
+      mixer.addEventListener('finished', (e) => {
+        idle.reset().fadeIn(0.4).play();
+        e.action.fadeOut(0.4);
+        buddy.classList.remove('waving');
+        busy = false;
+      });
+
+      // Say hi on arrival, then every few seconds; thumbs-up when clicked
+      setTimeout(() => gesture(wave), 600);
+      setInterval(() => gesture(wave), 9000);
+      buddy.addEventListener('click', () => gesture(thumbs));
+
+      const clock = new THREE.Clock();
+      renderer.setAnimationLoop(() => {
+        mixer.update(clock.getDelta());
+        renderer.render(scene, camera);
+      });
+    }
+  </script>
 
 </body>
 </html>
